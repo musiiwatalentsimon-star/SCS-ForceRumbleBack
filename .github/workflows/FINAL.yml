@@ -1,0 +1,33 @@
+name: Build ForceRumbleBack
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Visual Studio 2022
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Release x64
+        shell: pwsh
+        run: |
+          msbuild twinTurboRumbler.sln /m /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
+
+      - name: Find DLL
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path . -Filter *.dll -Recurse |
+            Select-Object FullName
+
+      - name: Upload DLL
+        uses: actions/upload-artifact@v4
+        with:
+          name: ForceRumbleBack-x64
+          path: |
+            **/*.dll
