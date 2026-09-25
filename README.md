@@ -8,3 +8,4 @@ This plug-in should properly implement dedicated support for "rumble" forcefeedb
 
 At this point it's not clear how outside "bumps" should reflect in this plugin's effects. Currently with SCS implementation, I can not tell when a bump is hit, as the only thing the controller can do is vibrate; such events would need an effect different than just vibration, so it will probably be left out of the plug in.
  
+.
